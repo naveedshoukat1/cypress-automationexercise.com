@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/naveedshoukat1/cypress-automationexercise.com/issues"
   },
-  "homepage": "https://github.com/naveedshoukat1/cypress-automationexercise.com#readme"
+  "homepage": "https://github.com/naveedshoukat1/cypress-automationexercise.com#readme",
+  "devDependencies": {
+    "cypress": "^12.14.0"
+  }
 }
