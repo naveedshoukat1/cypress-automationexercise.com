@@ -4,6 +4,7 @@ import { faker, fakerEN_US } from '@faker-js/faker';
 describe('initiates', () => {
   beforeEach(() => {
     cy.viewport('macbook-16')
+    cy.visit('https://www.automationexercise.com', { failOnStatusCode: false })
   })
   let firstname = faker.person.firstName('male')
   let Lastname = faker.person.lastName('male')
@@ -82,15 +83,18 @@ describe('initiates', () => {
     cy.get('.signup-form > form > p').should('be.visible').should('contain', 'Email Address already exist!')
   });
 
-  it.only('Test Case 6: Contact Us Form', () => {
+  it('Test Case 6: Contact Us Form', () => {
     cy.visit('https://www.automationexercise.com', { failOnStatusCode: false })
     cy.contains('Contact us').click()
     cy.url().should('contain', 'contact_us')
     cy.get('div.contact-form > .title').should('contain','Get In Touch')
   });
 
-  it('', () => {
-    
+  it.only('Test Case 7: Verify Test Cases Page ', () => {
+    cy.visit('https://www.automationexercise.com', { failOnStatusCode: false })
+    cy.contains(' Test Cases').click()
+    cy.url().should('contain', 'test_cases')
+    cy.get('h5').should('contain','Below is the list of test Cases for you to practice the Automation. Click on the scenario for detailed Test Steps:')
   });
 
 }) 
