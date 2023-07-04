@@ -20,7 +20,6 @@ describe('initiates', () => {
 
 
   it('Test Case 1: Register User', () => {
-    cy.visit('https://www.automationexercise.com', { failOnStatusCode: false })
     cy.contains(' Signup / Login').click()
     cy.url().should('contain', 'https://www.automationexercise.com/login')
     cy.get('input[name="name"]').should('be.visible').clear().type(fullname)
@@ -50,7 +49,6 @@ describe('initiates', () => {
   })
 
   it('Test Case 2: Login User with correct email and password', () => {
-    cy.visit('https://www.automationexercise.com', { failOnStatusCode: false })
     cy.contains(' Signup / Login').click()
     cy.url().should('contain', 'https://www.automationexercise.com/login')
     cy.get('[data-qa="login-email"]').should('be.visible').should('be.enabled').clear().type('naveed.shoukat@invozone.com')
@@ -59,7 +57,6 @@ describe('initiates', () => {
   })
 
   it('Test Case 3: Login User with incorrect email and password', () => {
-    cy.visit('https://www.automationexercise.com', { failOnStatusCode: false })
     cy.contains(' Signup / Login').click()
     cy.url().should('contain', 'https://www.automationexercise.com/login')
     cy.get('[data-qa="login-email"]').should('be.visible').should('be.enabled').clear().type(faker.internet.exampleEmail())
@@ -74,7 +71,6 @@ describe('initiates', () => {
   });
 
   it('Test Case 5: Register User with existing email', () => {
-    cy.visit('https://www.automationexercise.com', { failOnStatusCode: false })
     cy.contains(' Signup / Login').click()
     cy.url().should('contain', 'https://www.automationexercise.com/login')
     cy.get('input[name="name"]').should('be.visible').clear().type(fullname)
@@ -84,17 +80,40 @@ describe('initiates', () => {
   });
 
   it('Test Case 6: Contact Us Form', () => {
-    cy.visit('https://www.automationexercise.com', { failOnStatusCode: false })
     cy.contains('Contact us').click()
     cy.url().should('contain', 'contact_us')
     cy.get('div.contact-form > .title').should('contain','Get In Touch')
   });
 
-  it.only('Test Case 7: Verify Test Cases Page ', () => {
-    cy.visit('https://www.automationexercise.com', { failOnStatusCode: false })
+  it('Test Case 7: Verify Test Cases Page ', () => {
     cy.contains(' Test Cases').click()
     cy.url().should('contain', 'test_cases')
     cy.get('h5').should('contain','Below is the list of test Cases for you to practice the Automation. Click on the scenario for detailed Test Steps:')
+  });
+
+  it('Test Case 8: Verify All Products and product detail page', () => {
+    cy.contains('Products').click()
+    cy.url().should('contain', '/products')
+    cy.get('.left-sidebar > :nth-child(1)').should('contain','Category')
+    cy.get(':nth-child(3) > .product-image-wrapper > .choose > .nav > li > a').should('contain', 'View Product').click()
+    cy.url().should('contain', '/product_details/1')
+    cy.get('.product-information > h2').should('contain','Blue Top')
+    cy.get('.product-information > :nth-child(3)').should('contain','Category: Women > Tops')
+    cy.get(':nth-child(5) > span').should('contain','Rs. 500')
+    cy.get('.product-information > :nth-child(6)').should('contain','Availability:').should('contain',' In Stock')
+    cy.get('.product-information > :nth-child(7)').should('contain','Condition:')
+    cy.get('.product-information > :nth-child(8)').should('contain','Brand:').should('contain',' Polo')
+  });
+
+  it.only('Test Case 9: Search Product', () => {
+    cy.contains('Products').click()
+    cy.url().should('contain', '/products')
+    cy.contains('All Products')
+    cy.get('#search_product').clear().type('Men')
+    cy.get('#submit_search').click()
+    cy.url().should('contain', '/products?search=Men')
+    cy.contains('Searched Products')
+
   });
 
 }) 
