@@ -23,8 +23,6 @@ describe('initiates', () => {
   // let expiryYear = faker.date.between().
   // let expiryMonth = faker.date.month({ context: true })
 
-
-
   it('Test Case 1: Register User', () => {
     cy.contains(' Signup / Login').click()
     cy.url().should('contain', 'https://www.automationexercise.com/login')
@@ -102,7 +100,7 @@ describe('initiates', () => {
     cy.url().should('contain', '/products')
     cy.get('.left-sidebar > :nth-child(1)').should('contain','Category')
     cy.get(':nth-child(3) > .product-image-wrapper > .choose > .nav > li > a').should('contain', 'View Product').click()
-    cy.url().should('contain', '/product_details/1')
+    cy.url().should('contain', '/product_details')
     cy.get('.product-information > h2').should('contain','Blue Top')
     cy.get('.product-information > :nth-child(3)').should('contain','Category: Women > Tops')
     cy.get(':nth-child(5) > span').should('contain','Rs. 500')
@@ -383,7 +381,7 @@ describe('initiates', () => {
     cy.get('.title').should('contain','Brand - Biba Products')
   });
 
-  it.only('Test Case 20: Search Products and Verify Cart After Login ', () => {
+  it('Test Case 20: Search Products and Verify Cart After Login ', () => {
     cy.contains('Products').click()
     cy.url().should('contain', '/products')
     cy.get('.brands_products > h2').should('contain','Brands')
@@ -422,5 +420,18 @@ describe('initiates', () => {
     cy.get('#product-7 > .cart_description > h4 > a').should('contain','Madame Top For Women')
     cy.get('#product-42 > .cart_description > h4 > a').should('contain','Lace Top For Women')
     cy.get('#product-43 > .cart_description > h4 > a').should('contain','GRAPHIC DESIGN MEN T SHIRT - BLUE')
+  });
+  it('Test Case 21: Add review on product ', () => {
+    cy.contains('Products').click()
+    cy.url().should('contain', '/products')
+    cy.get('.left-sidebar > :nth-child(1)').should('contain','Category')
+    cy.get(':nth-child(3) > .product-image-wrapper > .choose > .nav > li > a').should('contain', 'View Product').click()
+    cy.url().should('contain', '/product_details')
+    cy.get('.product-information > h2').should('contain','Blue Top')
+    cy.get('#name').clear().type(faker.person.fullName())
+    cy.get('#email').clear().type(faker.internet.exampleEmail())
+    cy.get('#review').clear().type(faker.lorem.paragraphs(2))
+    cy.get('#button-review').click()
+    cy.get('.alert-success > span').should('contain','Thank you for your review')
   });
 }) 
