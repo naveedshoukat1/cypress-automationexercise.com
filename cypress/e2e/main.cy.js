@@ -68,8 +68,15 @@ describe('initiates', () => {
     cy.get('.login-form > form > p').should('be.visible').should('contain', 'Your email or password is incorrect!')
   })
 
-  it('Test Case 4: Logout User', () => {
-    cy.visit('https://www.automationexercise.com', { failOnStatusCode: false })
+  it.only('Test Case 4: Logout User', () => {
+    cy.contains(' Signup / Login').click()
+    cy.url().should('contain', '/login')
+    cy.get('[data-qa="login-email"]').should('be.visible').should('be.enabled').clear().type('naveed.shoukat@invozone.com')
+    cy.get('[data-qa="login-password"]').should('be.visible').should('be.enabled').clear().type('12345678')
+    cy.get('[data-qa="login-button"]').should('be.visible').should('be.enabled').click()
+    cy.url().should('eq','https://www.automationexercise.com/')
+    cy.get('.shop-menu > .nav > :nth-child(4) > a').should('contain', 'Logout').click()
+    cy.url().should('contain', '/login')
     
   });
 
