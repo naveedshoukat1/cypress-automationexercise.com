@@ -596,4 +596,20 @@ describe('initiates', () => {
     cy.get('[data-qa="continue-button"]').should('contain','Continue').click()
     cy.url().should('eq','https://www.automationexercise.com/')
    });
+
+   it('Test Case 25: Verify Scroll Up using Arrow button and Scroll Down functionality ', () => {
+    cy.scrollTo('bottom')
+    cy.get('#susbscribe_email').should('be.visible')
+    cy.get('#scrollUp').should('be.visible').click()
+    cy.get('.active > :nth-child(1) > h1').should('contain','AutomationExercise')
+    cy.get('.active > :nth-child(1) > h2').should('contain','Full-Fledged practice website for Automation Engineers')
+   });
+
+   it('Test Case 26: Verify Scroll Up without Arrow button and Scroll Down functionality', () => {
+    cy.scrollTo('bottom', { duration: 2000 })
+    cy.get('#susbscribe_email').should('be.visible')
+    cy.scrollTo('top', { duration: 2000 })
+    cy.get('.active > :nth-child(1) > h1').should('contain','AutomationExercise')
+    cy.get('.active > :nth-child(1) > h2').should('contain','Full-Fledged practice website for Automation Engineers')
+   });
 }) 
