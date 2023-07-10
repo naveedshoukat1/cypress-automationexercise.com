@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:run": "cypress run --env allure=true",
+    "clean:folders": "rm -R -f allure-report/* && rm -R -f allure-results/*",
+    "allure:report": "yarn run allure generate allure-results --clean -o allure-report && allure open allure-report",
+    "beforetest": "npm run clean:folders",
+    "tests": "npm run cy:run || npm run aftertest",
+    "aftertest": "npm run allure:report"
   },
   "repository": {
     "type": "git",
@@ -24,7 +29,10 @@
   "homepage": "https://github.com/naveedshoukat1/cypress-automationexercise.com#readme",
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
+    "@shelex/cypress-allure-plugin": "^2.40.0",
+    "allure-commandline": "^2.23.0",
     "cy-verify-downloads": "^0.1.15",
-    "cypress": "^12.14.0"
+    "cypress": "^12.14.0",
+    "mocha-allure-reporter": "^1.4.0"
   }
 }
