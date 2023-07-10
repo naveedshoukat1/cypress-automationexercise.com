@@ -11,7 +11,7 @@ describe('initiates', () => {
   let lastname = faker.person.lastName('male')
   let fullname = faker.person.fullName('male')
   let password = faker.internet.password({ length: 20, memorable: true, pattern: /[A-Z]/, prefix: 'Hello ' })
-  let email = faker.internet.exampleEmail({delay:50})
+  let email = faker.internet.exampleEmail({delay:30, allowSpecialCharacters: true, firstName: 'John' })
   let company = faker.company.buzzNoun()
   let streetaddress = faker.location.streetAddress(true)
   let state = fakerEN_US.location.state()
@@ -57,6 +57,7 @@ describe('initiates', () => {
     cy.get('[data-qa="login-email"]').should('be.visible').should('be.enabled').clear().type('naveed.shoukat@invozone.com')
     cy.get('[data-qa="login-password"]').should('be.visible').should('be.enabled').clear().type('12345678')
     cy.get('[data-qa="login-button"]').should('be.visible').should('be.enabled').click()
+    cy.get(':nth-child(10) > a').should('contain','Naveed Shoukat')
   })
 
   it('Test Case 3: Login User with incorrect email and password', () => {
@@ -68,13 +69,14 @@ describe('initiates', () => {
     cy.get('.login-form > form > p').should('be.visible').should('contain', 'Your email or password is incorrect!')
   })
 
-  it.only('Test Case 4: Logout User', () => {
+  it('Test Case 4: Logout User', () => {
     cy.contains(' Signup / Login').click()
     cy.url().should('contain', '/login')
     cy.get('[data-qa="login-email"]').should('be.visible').should('be.enabled').clear().type('naveed.shoukat@invozone.com')
     cy.get('[data-qa="login-password"]').should('be.visible').should('be.enabled').clear().type('12345678')
     cy.get('[data-qa="login-button"]').should('be.visible').should('be.enabled').click()
     cy.url().should('eq','https://www.automationexercise.com/')
+    cy.get(':nth-child(10) > a').should('contain','Naveed Shoukat')
     cy.get('.shop-menu > .nav > :nth-child(4) > a').should('contain', 'Logout').click()
     cy.url().should('contain', '/login')
     
@@ -427,6 +429,7 @@ describe('initiates', () => {
     cy.get('#product-42 > .cart_description > h4 > a').should('contain','Lace Top For Women')
     cy.get('#product-43 > .cart_description > h4 > a').should('contain','GRAPHIC DESIGN MEN T SHIRT - BLUE')
   });
+  
   it('Test Case 21: Add review on product ', () => {
     cy.contains('Products').click()
     cy.url().should('contain', '/products')
@@ -519,7 +522,7 @@ describe('initiates', () => {
     cy.url().should('eq','https://www.automationexercise.com/')
    });
 
-   it('Test Case 24: Download Invoice after purchase order ', () => {
+   it('Test Case 24: Download and verify the Invoice after purchase order ', () => {
     cy.scrollTo('0%', '90%')
     cy.get('.active > :nth-child(1) > .product-image-wrapper > .single-products > .productinfo > .btn').should('contain','Add to cart').click()
     cy.get('.modal-footer > .btn').should('contain','Continue Shopping').click()
