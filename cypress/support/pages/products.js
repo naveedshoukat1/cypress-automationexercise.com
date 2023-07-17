@@ -22,6 +22,20 @@ export class Products {
         this.categoryBrands = '.brands_products > h2';
         this.categoryWomenDress = '#Women > .panel-body > ul > :nth-child(1) > a';
         this.categoryMenTshirts = '#Men > .panel-body > ul > :nth-child(1) > a';
+        this.brands = '.brands_products > h2';
+        this.brandPolo = '.brands-name > .nav > :nth-child(1) > a';
+        this.brandHM = '.brands-name > .nav > :nth-child(2) > a';
+        this.BrandMadame = '.brands-name > .nav > :nth-child(3) > a';
+        this.BrandsMastHarbour = '.brands-name > .nav > :nth-child(4) > a'
+        this.BrandBabyhug = '.brands-name > .nav > :nth-child(5) > a';
+        this.BrandAllenSollyJunior = '.brands-name > .nav > :nth-child(6) > a';
+        this.BrandsKookieKids = '.brands-name > .nav > :nth-child(7) > a';
+        this.BrandsBiba = '.brands-name > .nav > :nth-child(8) > a';
+        this.AddToCartMenTshirt = ':nth-child(3) > .product-image-wrapper > .single-products > .productinfo > .btn';
+        this.AddToCartMadameTopForWomen = ':nth-child(4) > .product-image-wrapper > .single-products > .productinfo > .btn';
+        this.AddToCartLaceTopForWomen = ':nth-child(5) > .product-image-wrapper > .single-products > .productinfo > .btn';
+        this.AddToCartGRAPHICDESIGNMENTSHIRTBLUE = ':nth-child(6) > .product-image-wrapper > .single-products > .productinfo > .btn';
+        this.navbarCart = '.shop-menu > .nav > :nth-child(3) > a';
     }
 
     openProductsPage() {
@@ -98,11 +112,14 @@ export class Products {
     }
 
     viewCartpopup() {
-        cy.contains('View Cart').click()
+        cy.contains('View Cart')
+            .click()
     }
 
     typeProductQuantity() {
-        cy.get(this.quantitySelector).clear().type('4')
+        cy.get(this.quantitySelector)
+            .clear()
+            .type('4')
     }
 
     addToCartProductDetail() {
@@ -118,7 +135,8 @@ export class Products {
 
     verifyQuantity() {
         cy.get('.quantity').should('contain', 'Quantity')
-        cy.get('.disabled').contains('4')
+        cy.get('.disabled')
+            .contains('4')
     }
 
     clickRegisterLoginOncheckoutPopup() {
@@ -127,30 +145,126 @@ export class Products {
             .click()
     }
 
-    verifyCategories(){
-        cy.get(this.categoryWomen).should('contain','Women')
-        cy.get(this.categoryMen).should('contain','Men')
-        cy.get(this.categoryKids).should('contain','Kids')
-        cy.get(this.categoryBrands).should('contain','Brands')
+    verifyCategories() {
+        cy.get(this.categoryWomen)
+            .should('contain', 'Women')
+        cy.get(this.categoryMen)
+            .should('contain', 'Men')
+        cy.get(this.categoryKids)
+            .should('contain', 'Kids')
+        cy.get(this.categoryBrands)
+            .should('contain', 'Brands')
     }
-    clickCategoryWomen(){
-        cy.get(this.categoryWomen).should('contain','Women').click()
+    clickCategoryWomen() {
+        cy.get(this.categoryWomen)
+            .should('contain', 'Women')
+            .click()
     }
-    clickCategoryWomenDress(){
-        cy.get(this.categoryWomenDress).should('contain','Dress').click()
+    clickCategoryWomenDress() {
+        cy.get(this.categoryWomenDress)
+            .should('contain', 'Dress')
+            .click()
     }
-    verifyCategoryWomenDress(){
-        cy.url().should('contain','/category_products')
-        cy.get('.title').should('contain','Women - Dress Products')
+    verifyCategoryWomenDress() {
+        cy.url().should('contain', '/category_products')
+        cy.get('.title')
+            .should('contain', 'Women - Dress Products')
     }
-    clickCategoryMen(){
-        cy.get(this.categoryMen).should('contain','Men').click()
+    clickCategoryMen() {
+        cy.get(this.categoryMen)
+            .should('contain', 'Men')
+            .click()
     }
-    clickCategoryMenTshirts(){
-        cy.get(this.categoryMenTshirts).should('contain','Tshirts ').click()
+    clickCategoryMenTshirts() {
+        cy.get(this.categoryMenTshirts)
+            .should('contain', 'Tshirts ')
+            .click()
     }
-    verifyategoryMenTshirts(){
-        cy.url().should('contain','/category_products/')
+    verifyategoryMenTshirts() {
+        cy.url()
+            .should('contain', '/category_products/')
+    }
+
+    verifyContainsBrands() {
+        cy.get(this.brands)
+            .should('contain', 'Brands')
+    }
+    verifyContainsBrandsPolo() {
+
+        cy.get(this.brandPolo)
+            .should('contain', 'Polo')
+    }
+    verifyContainsBrandsHM() {
+        cy.get(this.brandHM)
+            .should('contain', 'H&M')
+    }
+    verifyContainsBrandsMadame() {
+        cy.get(this.BrandMadame)
+            .should('contain', 'Madame')
+    }
+    verifyContainsBrandsMastHarbour() {
+        cy.get(this.BrandsMastHarbour)
+            .should('contain', 'Mast & Harbour')
+    }
+    verifyContainsBrandsBabyhug() {
+        cy.get(this.BrandBabyhug)
+            .should('contain', 'Babyhug')
+    }
+    verifyContainsBrandsAllenSollyJunior() {
+        cy.get(this.BrandAllenSollyJunior)
+            .should('contain', 'Allen Solly Junior')
+    }
+    verifyContainsBrandsKookieKids() {
+        cy.get(this.BrandsKookieKids)
+            .should('contain', 'Kookie Kids')
+    }
+    verifyContainsBrandsBiba() {
+        cy.get(this.BrandsBiba)
+            .should('contain', 'Biba')
+    }
+    clickBrandPolo() {
+        cy.get(this.brandPolo)
+            .should('contain', 'Polo')
+            .click()
+    }
+    verifyBrandPoloDetailPage() {
+        cy.get('.title')
+            .should('contain', 'Brand - Polo Products')
+    }
+    clickBrandBiba() {
+        cy.get(this.BrandsBiba)
+            .should('contain', 'Biba')
+            .click()
+    }
+    verifyBrandBibaDetailPage() {
+        cy.get('.title')
+            .should('contain', 'Brand - Biba Products')
+    }
+    addToCartMenTshirt() {
+        cy.get(this.AddToCartMenTshirt)
+            .should('contain', 'Add to cart')
+            .click()
+
+    }
+    addToCartMadameTopForWomen() {
+        cy.get(this.AddToCartMadameTopForWomen)
+            .should('contain', 'Add to cart'
+            ).click()
+    }
+    addToCartLaceTopForWomen() {
+        cy.get(this.AddToCartLaceTopForWomen)
+            .should('contain', 'Add to cart')
+            .click()
+    }
+    addToCartGRAPHICDESIGNMENTSHIRTBLUE() {
+        cy.get(this.AddToCartGRAPHICDESIGNMENTSHIRTBLUE)
+            .should('contain', 'Add to cart')
+            .click()
+    }
+    clickNavbarCart() {
+        cy.get(this.navbarCart)
+            .should('contain', ' Cart')
+            .click()
     }
 
 }

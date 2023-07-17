@@ -308,7 +308,7 @@ describe('automationexercise.com test scripts', () => {
     cart.verifyEmptyCart();
   });
 
-  it.only('Test Case 18: View Category Products', () => {
+  it('Test Case 18: View Category Products', () => {
     products.openProductsPage();
     products.verifyProductsPage();
     products.verifyCategories();
@@ -321,62 +321,62 @@ describe('automationexercise.com test scripts', () => {
   });
 
   it('Test Case 19: View & Cart Brand Products', () => {
-    cy.contains('Products').click()
-    cy.url().should('contain', '/products')
-    cy.get('.brands_products > h2').should('contain', 'Brands')
-    cy.get('.brands-name > .nav > :nth-child(1) > a').should('contain', 'Polo')
-    cy.get('.brands-name > .nav > :nth-child(2) > a').should('contain', 'H&M')
-    cy.get('.brands-name > .nav > :nth-child(3) > a').should('contain', 'Madame')
-    cy.get('.brands-name > .nav > :nth-child(4) > a').should('contain', 'Mast & Harbour')
-    cy.get('.brands-name > .nav > :nth-child(5) > a').should('contain', 'Babyhug')
-    cy.get('.brands-name > .nav > :nth-child(6) > a').should('contain', 'Allen Solly Junior')
-    cy.get('.brands-name > .nav > :nth-child(7) > a').should('contain', 'Kookie Kids')
-    cy.get('.brands-name > .nav > :nth-child(8) > a').should('contain', 'Biba')
-    cy.get('.brands-name > .nav > :nth-child(1) > a').should('contain', 'Polo').click()
-    cy.get('.title').should('contain', 'Brand - Polo Products')
-    cy.get('.brands-name > .nav > :nth-child(8) > a').should('contain', 'Biba').click()
-    cy.get('.title').should('contain', 'Brand - Biba Products')
+    products.openProductsPage();
+    products.verifyProductsPage();
+    products.verifyContainsBrands();
+    products.verifyContainsBrandsPolo();
+    products.verifyContainsBrandsHM();
+    products.verifyContainsBrandsMadame();
+    products.verifyContainsBrandsMastHarbour();
+    products.verifyContainsBrandsBabyhug();
+    products.verifyContainsBrandsAllenSollyJunior();
+    products.verifyContainsBrandsKookieKids();
+    products.verifyContainsBrandsBiba();
+    products.clickBrandPolo();
+    products.verifyBrandPoloDetailPage();
+    products.clickBrandBiba();
+    products.verifyBrandBibaDetailPage();
   });
 
-  it('Test Case 20: Search Products and Verify Cart After Login ', () => {
-    cy.contains('Products').click()
-    cy.url().should('contain', '/products')
-    cy.get('.brands_products > h2').should('contain', 'Brands')
-    cy.get('.brands-name > .nav > :nth-child(1) > a').should('contain', 'Polo')
-    cy.get('.brands-name > .nav > :nth-child(2) > a').should('contain', 'H&M')
-    cy.get('.brands-name > .nav > :nth-child(3) > a').should('contain', 'Madame')
-    cy.get('.brands-name > .nav > :nth-child(4) > a').should('contain', 'Mast & Harbour')
-    cy.get('.brands-name > .nav > :nth-child(5) > a').should('contain', 'Babyhug')
-    cy.get('.brands-name > .nav > :nth-child(6) > a').should('contain', 'Allen Solly Junior')
-    cy.get('.brands-name > .nav > :nth-child(7) > a').should('contain', 'Kookie Kids')
-    cy.get('.brands-name > .nav > :nth-child(8) > a').should('contain', 'Biba')
-    cy.get('#search_product').clear().type('Men')
-    cy.get('#submit_search').click()
-    cy.url().should('contain', '/products?search=Men')
-    cy.contains('Searched Products')
-    cy.get(':nth-child(3) > .product-image-wrapper > .single-products > .productinfo > .btn').should('contain', 'Add to cart').click()
-    cy.get('.modal-footer > .btn').should('contain', 'Continue Shopping').click()
-    cy.get(':nth-child(4) > .product-image-wrapper > .single-products > .productinfo > .btn').should('contain', 'Add to cart').click()
-    cy.get('.modal-footer > .btn').should('contain', 'Continue Shopping').click()
-    cy.get(':nth-child(5) > .product-image-wrapper > .single-products > .productinfo > .btn').should('contain', 'Add to cart').click()
-    cy.get('.modal-footer > .btn').should('contain', 'Continue Shopping').click()
-    cy.get(':nth-child(6) > .product-image-wrapper > .single-products > .productinfo > .btn').should('contain', 'Add to cart').click()
-    cy.get('.modal-footer > .btn').should('contain', 'Continue Shopping').click()
-    cy.get('.shop-menu > .nav > :nth-child(3) > a').should('contain', ' Cart').click()
-    cy.get('#product-2 > .cart_description > h4 > a').should('contain', 'Men Tshirt')
-    cy.get('#product-7 > .cart_description > h4 > a').should('contain', 'Madame Top For Women')
-    cy.get('#product-42 > .cart_description > h4 > a').should('contain', 'Lace Top For Women')
-    cy.get('#product-43 > .cart_description > h4 > a').should('contain', 'GRAPHIC DESIGN MEN T SHIRT - BLUE')
-    cy.contains(' Signup / Login').click()
-    cy.url().should('contain', 'https://www.automationexercise.com/login')
-    cy.get('[data-qa="login-email"]').should('be.visible').should('be.enabled').clear().type('naveed.shoukat@invozone.com')
-    cy.get('[data-qa="login-password"]').should('be.visible').should('be.enabled').clear().type('12345678')
-    cy.get('[data-qa="login-button"]').should('be.visible').should('be.enabled').click()
-    cy.get('.shop-menu > .nav > :nth-child(3) > a').should('contain', ' Cart').click()
-    cy.get('#product-2 > .cart_description > h4 > a').should('contain', 'Men Tshirt')
-    cy.get('#product-7 > .cart_description > h4 > a').should('contain', 'Madame Top For Women')
-    cy.get('#product-42 > .cart_description > h4 > a').should('contain', 'Lace Top For Women')
-    cy.get('#product-43 > .cart_description > h4 > a').should('contain', 'GRAPHIC DESIGN MEN T SHIRT - BLUE')
+  it.only('Test Case 20: Search Products and Verify Cart After Login ', () => {
+    products.openProductsPage();
+    products.verifyProductsPage();
+    products.verifyContainsBrands();
+    products.verifyContainsBrandsPolo();
+    products.verifyContainsBrandsHM();
+    products.verifyContainsBrandsMadame();
+    products.verifyContainsBrandsMastHarbour();
+    products.verifyContainsBrandsBabyhug();
+    products.verifyContainsBrandsAllenSollyJunior();
+    products.verifyContainsBrandsKookieKids();
+    products.verifyContainsBrandsBiba();
+    products.openProductsPage();
+    products.verifyProductsPage();
+    products.searchProduct();
+    products.submitSearch();
+    products.verifySearchedProduct();
+    products.addToCartMenTshirt();
+    products.continueShoppingPopup();
+    products.addToCartMadameTopForWomen();
+    products.continueShoppingPopup();
+    products.addToCartLaceTopForWomen();
+    products.continueShoppingPopup();
+    products.addToCartGRAPHICDESIGNMENTSHIRTBLUE();
+    products.continueShoppingPopup();
+    products.clickNavbarCart();
+    cart.verifyMenTshirtInCart();
+    cart.verifyMadameTopForWomenInCart();
+    cart.verifyLaceTopForWomenInCart();
+    cart.verifyGRAPHICDESIGNMENTSHIRTBLUEinCart();
+    common.clickSignupLoginBtn();
+    login.inputLoginEmail(loginMail);
+    login.inputLoginPass(loginPass);
+    login.clickLoginBtn();
+    products.clickNavbarCart();
+    cart.verifyMenTshirtInCart();
+    cart.verifyMadameTopForWomenInCart();
+    cart.verifyLaceTopForWomenInCart();
+    cart.verifyGRAPHICDESIGNMENTSHIRTBLUEinCart();
   });
 
   it('Test Case 21: Add review on product ', () => {
