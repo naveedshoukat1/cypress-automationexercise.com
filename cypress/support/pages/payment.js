@@ -43,4 +43,13 @@ export class Payment {
         cy.contains('Order Placed!')
         cy.url().should('contain', '/payment_done')
     }
+    downloadAndVerifyInvoice(){
+        cy.window().document().then(function (doc) {
+            doc.addEventListener('click', () => {
+              setTimeout(function () { doc.location.reload() }, 5000)
+            })
+            cy.get('.col-sm-9 > .btn-default').should('contain', 'Download Invoice').click()
+            cy.verifyDownload('invoice.txt');
+          })
+    }
 }

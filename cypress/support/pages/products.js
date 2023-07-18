@@ -7,7 +7,7 @@ export class Products {
         this.price500 = ':nth-child(5) > span';
         this.availabilityInStock = '.product-information > :nth-child(6)';
         this.condition = '.product-information > :nth-child(7)';
-        this.brandPolo = '.product-information > :nth-child(8)';
+        this.brandInfoPolo = '.product-information > :nth-child(8)';
         this.searchProductSelector = '#search_product';
         this.submitSearchSelector = '#submit_search';
         this.productCardSelecetor1 = ':nth-child(3) > .product-image-wrapper > .single-products > .productinfo > img';
@@ -36,7 +36,13 @@ export class Products {
         this.AddToCartLaceTopForWomen = ':nth-child(5) > .product-image-wrapper > .single-products > .productinfo > .btn';
         this.AddToCartGRAPHICDESIGNMENTSHIRTBLUE = ':nth-child(6) > .product-image-wrapper > .single-products > .productinfo > .btn';
         this.navbarCart = '.shop-menu > .nav > :nth-child(3) > a';
+        this.reviewerName = '#name';
+        this.reviewerEmail = '#email';
+        this.review = '#review';
+        this.reviewSubmitBtn = '#button-review';
+        this.reviewSuccessMsg = '.alert-success > span';
     }
+
 
     openProductsPage() {
         cy.contains('Products')
@@ -71,7 +77,7 @@ export class Products {
             .should('contain', ' In Stock')
         cy.get(this.condition)
             .should('contain', 'Condition:')
-        cy.get(this.brandPolo)
+        cy.get(this.brandInfoPolo)
             .should('contain', 'Brand:')
             .should('contain', ' Polo')
     }
@@ -265,6 +271,29 @@ export class Products {
         cy.get(this.navbarCart)
             .should('contain', ' Cart')
             .click()
+    }
+    inputReviewerName(fullName) {
+        cy.get(this.reviewerName)
+            .clear()
+            .type(fullName)
+    }
+    inputReviewerEmail(exampleEmail) {
+        cy.get(this.reviewerEmail)
+            .clear()
+            .type(exampleEmail)
+    }
+    inputReview(review) {
+        cy.get(this.review)
+            .clear()
+            .type(review)
+    }
+    clickSubmitRevieBtn() {
+        cy.get(this.reviewSubmitBtn)
+            .click()
+    }
+    verifySubmittedReview() {
+        cy.get(this.reviewSuccessMsg)
+            .should('contain', 'Thank you for your review')
     }
 
 }

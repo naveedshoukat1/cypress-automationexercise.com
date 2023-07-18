@@ -6,7 +6,13 @@ export class Common {
         this.subscribeSelector = '#subscribe';
         this.cartSelector = '.shop-menu > .nav > :nth-child(3) > a';
         this.continueBtn = '[data-qa="continue-button"]';
-        this.deleteAccSelector = ':nth-child(5) > a';
+        this.deleteAccSelector = '.shop-menu > .nav > :nth-child(5) > a';
+        this.recommendedProduct1 = '.active > :nth-child(1) > .product-image-wrapper > .single-products > .productinfo > .btn';
+        this.recommendedProduct2 = '.active > :nth-child(2) > .product-image-wrapper > .single-products > .productinfo > .btn';
+        this.recommendedProduct3 = '.active > :nth-child(3) > .product-image-wrapper > .single-products > .productinfo > .btn';
+        this.scrollUpBtn = '#scrollUp';
+        this.AutomationExerciseText = '.active > :nth-child(1) > h1';
+        this.Full_FledgedText = '.active > :nth-child(1) > h2';
     }
 
     clickSignupLoginBtn() {
@@ -83,5 +89,47 @@ export class Common {
         cy.url()
             .should('eq', 'https://www.automationexercise.com/')
     }
+    scrollToRecommendedSection() {
+        cy.scrollTo('0%', '90%', { duration: 2000 })
+    }
+    addToCartrecommendedProduct1() {
+        cy.get(this.recommendedProduct1)
+            .should('contain', 'Add to cart')
+            .click()
+    }
+    addToCartrecommendedProduct2() {
+        cy.get(this.recommendedProduct2)
+            .should('contain', 'Add to cart')
+            .click()
+    }
+    addToCartrecommendedProduct3() {
+        cy.get(this.recommendedProduct3)
+            .should('contain', 'Add to cart')
+            .click()
+    }
+    scrollToBottom() {
+        cy.scrollTo('bottom', { duration: 2000 })
+    }
+    verifySusbscribeEmailSelector() {
+        cy.get(this.susbscribeEmailSelector)
+            .should('be.visible')
+    }
+    clickScrollUpBtn() {
+        cy.get(this.scrollUpBtn, { duration: 2000 })
+            .should('be.visible')
+            .click()
+    }
+    verifyAutomationExerciseText() {
+        cy.get(this.AutomationExerciseText)
+            .should('contain', 'AutomationExercise')
+    }
+    verifyFull_FledgedText() {
+        cy.get(this.Full_FledgedText)
+            .should('contain', 'Full-Fledged practice website for Automation Engineers')
+    }
+    scrollToTop(){
+        cy.scrollTo('top', { duration: 2000 })
+    }
+
 
 }
